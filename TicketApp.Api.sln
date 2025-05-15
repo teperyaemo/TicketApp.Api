@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{D5D22CDE-2E37-454C-8099-F32CF71054E0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{B156B66A-924F-4687-A8FA-F24A98030F31}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{512CA76C-5297-48CD-910F-6B7702317E29}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketApp.Api.Domain", "TicketApp.Api.Domain\TicketApp.Api.Domain.csproj", "{4320E838-DDD9-4541-B2BE-04FB560DC4C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketApp.Api.Appication", "TicketApp.Api.Appication\TicketApp.Api.Appication.csproj", "{DEE3EB64-F8CB-496E-BF4A-AE684CE880B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketApp.Api.Persistence", "TicketApp.Api.Persistence\TicketApp.Api.Persistence.csproj", "{ABB0B926-5BC8-447D-87CD-EFF127D3F75F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketApp.Api.Web", "TicketApp.Api.Web\TicketApp.Api.Web.csproj", "{D69CBB58-1074-4388-B387-002CF1257650}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{731F93E8-A4F8-4DAB-B505-EEFED77575D8}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4320E838-DDD9-4541-B2BE-04FB560DC4C4} = {D5D22CDE-2E37-454C-8099-F32CF71054E0}
+		{DEE3EB64-F8CB-496E-BF4A-AE684CE880B0} = {D5D22CDE-2E37-454C-8099-F32CF71054E0}
+		{ABB0B926-5BC8-447D-87CD-EFF127D3F75F} = {B156B66A-924F-4687-A8FA-F24A98030F31}
+		{D69CBB58-1074-4388-B387-002CF1257650} = {512CA76C-5297-48CD-910F-6B7702317E29}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4320E838-DDD9-4541-B2BE-04FB560DC4C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4320E838-DDD9-4541-B2BE-04FB560DC4C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4320E838-DDD9-4541-B2BE-04FB560DC4C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4320E838-DDD9-4541-B2BE-04FB560DC4C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DEE3EB64-F8CB-496E-BF4A-AE684CE880B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEE3EB64-F8CB-496E-BF4A-AE684CE880B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEE3EB64-F8CB-496E-BF4A-AE684CE880B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEE3EB64-F8CB-496E-BF4A-AE684CE880B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABB0B926-5BC8-447D-87CD-EFF127D3F75F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABB0B926-5BC8-447D-87CD-EFF127D3F75F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABB0B926-5BC8-447D-87CD-EFF127D3F75F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABB0B926-5BC8-447D-87CD-EFF127D3F75F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D69CBB58-1074-4388-B387-002CF1257650}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D69CBB58-1074-4388-B387-002CF1257650}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D69CBB58-1074-4388-B387-002CF1257650}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D69CBB58-1074-4388-B387-002CF1257650}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

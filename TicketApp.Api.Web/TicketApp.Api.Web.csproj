@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.15"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.15">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Serilog.AspNetCore" Version="8.0.3" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="8.1.1" />
+        <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.9.0"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\TicketApp.Api.Appication\TicketApp.Api.Appication.csproj"/>
+        <ProjectReference Include="..\TicketApp.Api.Domain\TicketApp.Api.Domain.csproj"/>
+        <ProjectReference Include="..\TicketApp.Api.Persistence\TicketApp.Api.Persistence.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="..\.dockerignore">
+            <Link>.dockerignore</Link>
+        </Content>
+    </ItemGroup>
+
+</Project>

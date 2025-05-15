@@ -1,0 +1,31 @@
+﻿services:
+  ticketapp.api.web:
+    container_name: ticket-app-api
+    image: ticketapp.api.web
+    build:
+      context: .
+      dockerfile: TicketApp.Api.Web/Dockerfile
+    depends_on:
+      - database
+    environment:
+      - ConnectionStrings__DbConnection=Host=ticket-db;Port=5432;User Id=postgres;Password=postgres;Database=TicketAppDb;Maximum Pool Size=200;
+    ports:
+      - '8080:8080'
+
+  database:
+    container_name: ticket-db
+    restart: always
+    image: postgres:16.3-alpine
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: TicketAppDb
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8 --locale=C"
+    ports:
+      - '5432:5432'
+
+volumes:
+  db-data:
+    driver: local
