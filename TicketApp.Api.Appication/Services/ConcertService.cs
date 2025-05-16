@@ -45,18 +45,34 @@ public class ConcertService : IConcertService
         return await _concertRepository.GetConcertAsync(id, cancellationToken);
     }
 
-    public async Task<Concert?> UpdateConcertAsync(ConcertUpdateDto concertDto, CancellationToken cancellationToken)
+    public async Task<Concert?> UpdateConcertAsync(Guid id, ConcertDto concertDto, CancellationToken cancellationToken)
     {
-        var concert = await _concertRepository.GetConcertAsync(concertDto.Id, cancellationToken);
+        var concert = await _concertRepository.GetConcertAsync(id, cancellationToken);
+        var allowedContentTypes = new[] { "image/jpeg", "image/png" };
 
-        if (concert == null)
-            return null;
+        if (concert != null)
+        {
+            concert.Name = concertDto.Name;
+            concert.AvailableTicketAmount = concertDto.AvailableTicketAmount;
+            concert.StartedAt = concertDto.StartedAt;
+            concert.TicketPrice = concertDto.TicketPrice;
 
-        concert.Name = concertDto.Name;
-        concert.AvailableTicketAmount = concertDto.AvailableTicketAmount;
-        concert.StartedAt = concertDto.StartedAt;
-
-        await _concertRepository.SaveChangesAsync(cancellationToken);
+            if (concertDto.Image != null && concertDto.Image.Length != 0 && allowedContentTypes.Contains(concertDto.Image.ContentType))
+            {
+                try
+                {
+                    using var memoryStream = new MemoryStream();
+                    await concertDto.Image.CopyToAsync(memoryStream);
+                    var imageData = memoryStream.ToArray();
+                    concert.Image = imageData;
+                }
+                catch (Exception ex)
+                {
+                }
+            }
+            
+            await _concertRepository.SaveChangesAsync(cancellationToken);
+        }
 
         return concert;
     }
@@ -73,6 +89,7 @@ public class ConcertService : IConcertService
 
     public async Task<Guid> CreateConcert(ConcertDto concertDto, CancellationToken cancellationToken)
     {
+        var allowedContentTypes = new[] { "image/jpeg", "image/png" };
         var concert = new Concert
         {
             Id = default,
@@ -84,6 +101,21 @@ public class ConcertService : IConcertService
             CreatedAt = DateTimeOffset.Now,
             Tickets = null
         };
+        
+        
+        if (concertDto.Image != null && concertDto.Image.Length != 0 && allowedContentTypes.Contains(concertDto.Image.ContentType))
+        {
+            try
+            {
+                using var memoryStream = new MemoryStream();
+                await concertDto.Image.CopyToAsync(memoryStream);
+                var imageData = memoryStream.ToArray();
+                concert.Image = imageData;
+            }
+            catch (Exception ex)
+            {
+            }
+        }
 
         await _concertRepository.CreateConcertAsync(concert, cancellationToken);
         await _concertRepository.SaveChangesAsync(cancellationToken);

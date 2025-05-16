@@ -36,6 +36,10 @@ namespace TicketApp.Api.Persistence.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasDefaultValueSql("NOW()");
 
+                    b.Property<byte[]>("Image")
+                        .IsRequired()
+                        .HasColumnType("bytea");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
@@ -57,6 +61,30 @@ namespace TicketApp.Api.Persistence.Migrations
                     b.ToTable("Concerts");
                 });
 
+            modelBuilder.Entity("TicketApp.Api.Domain.Entities.Favorite", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("ConcertId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ConcertId");
+
+                    b.HasIndex("Id")
+                        .IsUnique();
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Favorites");
+                });
+
             modelBuilder.Entity("TicketApp.Api.Domain.Entities.Post", b =>
                 {
                     b.Property<Guid>("Id")
@@ -71,7 +99,15 @@ namespace TicketApp.Api.Persistence.Migrations
                     b.Property<DateTimeOffset?>("EditedAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<byte[]>("Image")
+                        .IsRequired()
+                        .HasColumnType("bytea");
+
                     b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -127,6 +163,10 @@ namespace TicketApp.Api.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<byte[]>("ProfilePicture")
+                        .IsRequired()
+                        .HasColumnType("bytea");
+
                     b.Property<string>("Role")
                         .IsRequired()
                         .HasColumnType("text");
@@ -141,6 +181,25 @@ namespace TicketApp.Api.Persistence.Migrations
                         .IsUnique();
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("TicketApp.Api.Domain.Entities.Favorite", b =>
+                {
+                    b.HasOne("TicketApp.Api.Domain.Entities.Concert", "Concert")
+                        .WithMany("Favorites")
+                        .HasForeignKey("ConcertId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TicketApp.Api.Domain.Entities.User", "User")
+                        .WithMany("Favorites")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Concert");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("TicketApp.Api.Domain.Entities.Post", b =>
@@ -175,11 +234,15 @@ namespace TicketApp.Api.Persistence.Migrations
 
             modelBuilder.Entity("TicketApp.Api.Domain.Entities.Concert", b =>
                 {
+                    b.Navigation("Favorites");
+
                     b.Navigation("Tickets");
                 });
 
             modelBuilder.Entity("TicketApp.Api.Domain.Entities.User", b =>
                 {
+                    b.Navigation("Favorites");
+
                     b.Navigation("Posts");
 
                     b.Navigation("Tickets");

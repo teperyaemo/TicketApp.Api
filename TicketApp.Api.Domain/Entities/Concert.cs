@@ -8,7 +8,9 @@ public class Concert
     public int AvailableTicketAmount { get; set; }
     public int SoldTickets { get; set; }
     public decimal TicketPrice { get; set; }
+    public byte[] Image { get; set; } = [];
     public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.Now;
 
     public virtual List<Ticket>? Tickets { get; set; } = [];
+    public virtual List<Favorite> Favorites { get; set; } = [];
 }

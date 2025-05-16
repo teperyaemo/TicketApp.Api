@@ -14,6 +14,9 @@ public class ConcertConfiguration : IEntityTypeConfiguration<Concert>
             .WithOne(loc => loc.Concert)
             .HasForeignKey(loc => loc.ConcertId)
             .IsRequired();
+        builder.HasMany(model => model.Tickets)
+            .WithOne(loc => loc.Concert)
+            .HasForeignKey(loc => loc.ConcertId);
         builder.Property(e => e.CreatedAt)
             .HasDefaultValueSql("NOW()")
             .ValueGeneratedOnAdd();

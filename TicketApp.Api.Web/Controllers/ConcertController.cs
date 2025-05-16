@@ -21,9 +21,10 @@ public class ConcertController : ControllerBase
 
     [Authorize(Roles = "Admin")]
     [HttpPost]
+    [Consumes("multipart/form-data")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-    public async Task<Guid> Create([FromBody] ConcertDto dto, CancellationToken cancellationToken)
+    public async Task<Guid> Create([FromForm] ConcertDto dto, CancellationToken cancellationToken)
     {
         var result = await _concertService.CreateConcert(dto, cancellationToken);
 
@@ -71,12 +72,13 @@ public class ConcertController : ControllerBase
     }
 
     [Authorize(Roles = "Admin")]
-    [HttpPut]
+    [HttpPut("{id:guid}")]
+    [Consumes("multipart/form-data")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-    public async Task<Concert?> Update([FromBody] ConcertUpdateDto dto, CancellationToken cancellationToken)
+    public async Task<Concert?> Update(Guid id, [FromForm] ConcertDto dto, CancellationToken cancellationToken)
     {
-        var result = await _concertService.UpdateConcertAsync(dto, cancellationToken);
+        var result = await _concertService.UpdateConcertAsync(id, dto, cancellationToken);
 
         return result;
     }

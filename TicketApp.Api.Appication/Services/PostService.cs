@@ -22,12 +22,32 @@ public class PostService : IPostService
         return await _postRepository.GetPostAsync(id, cancellationToken);
     }
 
-    public async Task<Post?> UpdatePost(PostUpdateDto postDto, CancellationToken cancellationToken)
+    public async Task<Post?> UpdatePost(Guid id, PostDto postDto, CancellationToken cancellationToken)
     {
-        var post = await _postRepository.GetPostAsync(postDto.Id, cancellationToken);
-        post.Text = postDto.Text;
+        var post = await _postRepository.GetPostAsync(id, cancellationToken);
+        var allowedContentTypes = new[] { "image/jpeg", "image/png" };
 
-        await _postRepository.SaveChangesAsync(cancellationToken);
+        if (post != null)
+        {
+            post.Title = postDto.Title;
+            post.Text = postDto.Text;
+
+            if (postDto.Image != null && postDto.Image.Length != 0 && allowedContentTypes.Contains(postDto.Image.ContentType))
+            {
+                try
+                {
+                    using var memoryStream = new MemoryStream();
+                    await postDto.Image.CopyToAsync(memoryStream);
+                    var imageData = memoryStream.ToArray();
+                    post.Image = imageData;
+                }
+                catch (Exception ex)
+                {
+                }
+            }
+
+            await _postRepository.SaveChangesAsync(cancellationToken);
+        }
 
         return post;
     }
@@ -39,14 +59,30 @@ public class PostService : IPostService
 
     public async Task<Guid> CreatePostAsync(PostDto postDto, CancellationToken cancellationToken)
     {
+        var allowedContentTypes = new[] { "image/jpeg", "image/png" };
         var post = new Post
         {
             Id = Guid.NewGuid(),
             UserId = _userContext.UserId,
+            Title = postDto.Title,
             Text = postDto.Text,
             CreatedAt = DateTimeOffset.Now,
             EditedAt = null
         };
+        
+        if (postDto.Image != null && postDto.Image.Length != 0 && allowedContentTypes.Contains(postDto.Image.ContentType))
+        {
+            try
+            {
+                using var memoryStream = new MemoryStream();
+                await postDto.Image.CopyToAsync(memoryStream);
+                var imageData = memoryStream.ToArray();
+                post.Image = imageData;
+            }
+            catch (Exception ex)
+            {
+            }
+        }
 
         await _postRepository.CreatePost(post, cancellationToken);
         await _postRepository.SaveChangesAsync(cancellationToken);

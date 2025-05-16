@@ -16,6 +16,9 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.HasMany(model => model.Posts)
             .WithOne(loc => loc.User)
             .HasForeignKey(loc => loc.UserId);
+        builder.HasMany(model => model.Tickets)
+            .WithOne(loc => loc.User)
+            .HasForeignKey(loc => loc.UserId);
         builder.Property(e => e.CreatedAt)
             .HasDefaultValueSql("NOW()")
             .ValueGeneratedOnAdd();

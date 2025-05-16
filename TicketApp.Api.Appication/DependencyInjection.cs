@@ -13,6 +13,7 @@ public static class DependencyInjection
         services.AddScoped<IConcertService, ConcertService>();
         services.AddScoped<IPostService, PostService>();
         services.AddScoped<ITicketService, TicketService>();
+        services.AddScoped<IFavoriteService, FavoriteService>();
 
         return services;
     }

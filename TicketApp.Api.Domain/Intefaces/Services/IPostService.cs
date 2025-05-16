@@ -6,7 +6,7 @@ namespace TicketApp.Api.Domain.Intefaces.Services;
 public interface IPostService
 {
     Task<Post?> GetPostAsync(Guid id, CancellationToken cancellationToken);
-    Task<Post?> UpdatePost(PostUpdateDto postDto, CancellationToken cancellationToken);
+    Task<Post?> UpdatePost(Guid id, PostDto postDto, CancellationToken cancellationToken);
     Task<List<Post>?> GetPostPageAsync(int page, int take, CancellationToken cancellationToken);
     Task<Guid> CreatePostAsync(PostDto post, CancellationToken cancellationToken);
     Task DeletePost(Guid id, CancellationToken cancellationToken);

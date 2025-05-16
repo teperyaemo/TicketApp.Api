@@ -21,9 +21,10 @@ public class PostController : ControllerBase
 
     [Authorize(Roles = "Admin")]
     [HttpPost]
+    [Consumes("multipart/form-data")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-    public async Task<Guid> Create([FromBody] PostDto dto, CancellationToken cancellationToken)
+    public async Task<Guid> Create([FromForm] PostDto dto, CancellationToken cancellationToken)
     {
         var result = await _postService.CreatePostAsync(dto, cancellationToken);
 
@@ -51,12 +52,13 @@ public class PostController : ControllerBase
     }
 
     [Authorize(Roles = "Admin")]
-    [HttpPut]
+    [HttpPut("{id:guid}")]
+    [Consumes("multipart/form-data")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-    public async Task<Post> Update([FromBody] PostUpdateDto dto, CancellationToken cancellationToken)
+    public async Task<Post?> Update(Guid id, [FromForm] PostDto dto, CancellationToken cancellationToken)
     {
-        var result = await _postService.UpdatePost(dto, cancellationToken);
+        var result = await _postService.UpdatePost(id, dto, cancellationToken);
 
         return result;
     }
