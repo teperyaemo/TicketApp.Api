@@ -8,7 +8,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentatio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketApp.Api.Domain", "TicketApp.Api.Domain\TicketApp.Api.Domain.csproj", "{4320E838-DDD9-4541-B2BE-04FB560DC4C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketApp.Api.Appication", "TicketApp.Api.Appication\TicketApp.Api.Appication.csproj", "{DEE3EB64-F8CB-496E-BF4A-AE684CE880B0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketApp.Api.Application", "TicketApp.Api.Application\TicketApp.Api.Application.csproj", "{DEE3EB64-F8CB-496E-BF4A-AE684CE880B0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketApp.Api.Persistence", "TicketApp.Api.Persistence\TicketApp.Api.Persistence.csproj", "{ABB0B926-5BC8-447D-87CD-EFF127D3F75F}"
 EndProject
@@ -18,6 +18,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		docker-compose.yml = docker-compose.yml
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketApp.Api.Client", "TicketApp.Api.Client\TicketApp.Api.Client.csproj", "{59E3D06E-75A8-42D6-A230-D9265110EADD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketApp.Api.Shared", "TicketApp.Api.Shared\TicketApp.Api.Shared.csproj", "{F55F93B8-C0E1-428B-8132-9A65CEDB606C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +33,8 @@ Global
 		{DEE3EB64-F8CB-496E-BF4A-AE684CE880B0} = {D5D22CDE-2E37-454C-8099-F32CF71054E0}
 		{ABB0B926-5BC8-447D-87CD-EFF127D3F75F} = {B156B66A-924F-4687-A8FA-F24A98030F31}
 		{D69CBB58-1074-4388-B387-002CF1257650} = {512CA76C-5297-48CD-910F-6B7702317E29}
+		{59E3D06E-75A8-42D6-A230-D9265110EADD} = {B156B66A-924F-4687-A8FA-F24A98030F31}
+		{F55F93B8-C0E1-428B-8132-9A65CEDB606C} = {D5D22CDE-2E37-454C-8099-F32CF71054E0}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{4320E838-DDD9-4541-B2BE-04FB560DC4C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -47,5 +53,13 @@ Global
 		{D69CBB58-1074-4388-B387-002CF1257650}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D69CBB58-1074-4388-B387-002CF1257650}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D69CBB58-1074-4388-B387-002CF1257650}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59E3D06E-75A8-42D6-A230-D9265110EADD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59E3D06E-75A8-42D6-A230-D9265110EADD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59E3D06E-75A8-42D6-A230-D9265110EADD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59E3D06E-75A8-42D6-A230-D9265110EADD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F55F93B8-C0E1-428B-8132-9A65CEDB606C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F55F93B8-C0E1-428B-8132-9A65CEDB606C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F55F93B8-C0E1-428B-8132-9A65CEDB606C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F55F93B8-C0E1-428B-8132-9A65CEDB606C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

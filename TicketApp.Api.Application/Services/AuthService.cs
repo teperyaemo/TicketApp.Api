@@ -3,13 +3,13 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using TicketApp.Api.Appication.CommonServices;
+using TicketApp.Api.Application.CommonServices;
 using TicketApp.Api.Domain.Entities;
 using TicketApp.Api.Domain.Enums;
 using TicketApp.Api.Domain.Intefaces.Repositories;
 using TicketApp.Api.Domain.Intefaces.Services;
 
-namespace TicketApp.Api.Appication.Services;
+namespace TicketApp.Api.Application.Services;
 
 public class AuthService : IAuthService
 {

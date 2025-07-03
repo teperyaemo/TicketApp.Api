@@ -4,7 +4,7 @@ using TicketApp.Api.Domain.Intefaces;
 using TicketApp.Api.Domain.Intefaces.Repositories;
 using TicketApp.Api.Domain.Intefaces.Services;
 
-namespace TicketApp.Api.Appication.Services;
+namespace TicketApp.Api.Application.Services;
 
 public class ConcertService : IConcertService
 {
@@ -77,9 +77,18 @@ public class ConcertService : IConcertService
         return concert;
     }
 
-    public async Task<List<Concert>?> GetConcertsPageAsync(int page, int take, CancellationToken cancellationToken)
+    public async Task<List<Concert>?> GetConcertsPageAsync(int page, int take, string? name, CancellationToken cancellationToken)
     {
-        return await _concertRepository.GetConcertsPageAsync((page - 1) * take, take, cancellationToken);
+        var lowerName = "";
+
+        if (!string.IsNullOrWhiteSpace(name))
+        {
+            lowerName = name.ToLower();
+        }
+
+        var list = await _concertRepository.GetConcertsByName(lowerName, cancellationToken);
+
+        return list.Skip((page - 1) * take).Take(take).ToList();
     }
 
     public async Task<List<Concert>?> GetConcertsByName(string name, CancellationToken cancellationToken)

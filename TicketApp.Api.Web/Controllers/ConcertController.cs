@@ -64,9 +64,9 @@ public class ConcertController : ControllerBase
     [HttpGet("paged")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-    public async Task<List<Concert>?> Get(int page, int take, CancellationToken cancellationToken)
+    public async Task<List<Concert>?> Get(int page, int take, string? name, CancellationToken cancellationToken)
     {
-        var result = await _concertService.GetConcertsPageAsync(page, take, cancellationToken);
+        var result = await _concertService.GetConcertsPageAsync(page, take, name, cancellationToken);
 
         return result;
     }

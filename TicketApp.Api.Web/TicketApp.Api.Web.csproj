@@ -13,13 +13,15 @@
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
+        <PackageReference Include="S2k.Common" Version="2.1.2" />
         <PackageReference Include="Serilog.AspNetCore" Version="8.0.3" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="8.1.1" />
         <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.9.0"/>
+        <PackageReference Include="TicketApp.Api.Shared" Version="1.0.2" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\TicketApp.Api.Appication\TicketApp.Api.Appication.csproj"/>
+        <ProjectReference Include="..\TicketApp.Api.Application\TicketApp.Api.Application.csproj" />
         <ProjectReference Include="..\TicketApp.Api.Domain\TicketApp.Api.Domain.csproj"/>
         <ProjectReference Include="..\TicketApp.Api.Persistence\TicketApp.Api.Persistence.csproj"/>
     </ItemGroup>

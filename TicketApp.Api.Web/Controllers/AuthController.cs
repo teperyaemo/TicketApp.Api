@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Skreet2k.Common.Models;
 using TicketApp.Api.Domain.Dtos;
 using TicketApp.Api.Domain.Intefaces.Services;
 
@@ -22,8 +23,9 @@ public class AuthController : ControllerBase
     [AllowAnonymous]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult> Register([FromBody] RegisterRequest request, CancellationToken cancellationToken)
+    public async Task<Result<LoginResponse>> Register([FromBody] RegisterRequest request, CancellationToken cancellationToken)
     {
+        var result = new Result<LoginResponse>();
         var allowedChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{};':\",./<>?\\|";
 
         if (!string.IsNullOrWhiteSpace(request.UserName) && 
@@ -36,31 +38,39 @@ public class AuthController : ControllerBase
             try
             {
                 var token = await _authService.RegisterAsync(request.UserName, request.Password, cancellationToken);
-                return Ok(new LoginResponse { Token = token });
+                result.Content = new LoginResponse{ Token = token };
+                return result;
             }
             catch (Exception ex)
             {
-                return BadRequest(new { Error = ex.Message });
+                result.ErrorMessage = ex.Message;
+                return result;
             }
         }
         
-        return BadRequest(new { Error = "Некорректные логин или пароль" });
+        result.ErrorMessage = "Некорректные логин или пароль";
+        return result;
     }
 
     [HttpPost("login")]
     [AllowAnonymous]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> Login([FromBody] LoginRequest request, CancellationToken cancellationToken)
+    public async Task<Result<LoginResponse>> Login([FromBody] LoginRequest request, CancellationToken cancellationToken)
     {
+        var result = new Result<LoginResponse>();
+        
         try
         {
             var token = await _authService.LoginAsync(request.UserName, request.Password, cancellationToken);
-            return Ok(new LoginResponse { Token = token });
+            result.Content = new LoginResponse{ Token = token };
+            return result;
         }
         catch (Exception ex)
         {
-            return Unauthorized(new { Error = ex.Message });
+            result.ErrorMessage = ex.Message;
+            result.ReturnCode = 401;
+            return result;
         }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using TicketApp.Api.Appication.Services;
+using TicketApp.Api.Application.Services;
 using TicketApp.Api.Domain.Intefaces.Services;
 
-namespace TicketApp.Api.Appication;
+namespace TicketApp.Api.Application;
 
 public static class DependencyInjection
 {

@@ -7,10 +7,11 @@ EXPOSE 8035
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
+COPY ./nuget.config .
 COPY ["TicketApp.Api.Web/TicketApp.Api.Web.csproj", "TicketApp.Api.Web/"]
 COPY ["TicketApp.Api.Domain/TicketApp.Api.Domain.csproj", "TicketApp.Api.Domain/"]
 COPY ["TicketApp.Api.Persistence/TicketApp.Api.Persistence.csproj", "TicketApp.Api.Persistence/"]
-COPY ["TicketApp.Api.Appication/TicketApp.Api.Appication.csproj", "TicketApp.Api.Appication/"]
+COPY ["TicketApp.Api.Application/TicketApp.Api.Application.csproj", "TicketApp.Api.Appication/"]
 RUN dotnet restore "TicketApp.Api.Web/TicketApp.Api.Web.csproj"
 COPY . .
 WORKDIR "/src/TicketApp.Api.Web"

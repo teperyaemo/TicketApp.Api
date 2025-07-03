@@ -3,7 +3,7 @@ using TicketApp.Api.Domain.Intefaces;
 using TicketApp.Api.Domain.Intefaces.Repositories;
 using TicketApp.Api.Domain.Intefaces.Services;
 
-namespace TicketApp.Api.Appication.Services;
+namespace TicketApp.Api.Application.Services;
 
 public class FavoriteService : IFavoriteService
 {

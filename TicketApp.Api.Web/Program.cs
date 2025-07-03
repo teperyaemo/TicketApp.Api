@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
-using TicketApp.Api.Appication;
+using TicketApp.Api.Application;
 using TicketApp.Api.Domain.Intefaces;
 using TicketApp.Api.Persistence;
 using TicketApp.Api.Persistence.Extensions;

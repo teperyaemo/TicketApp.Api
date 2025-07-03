@@ -18,9 +18,9 @@ public class UserRepository : IUserRepository
         return _context.Users.FirstOrDefaultAsync(x => x.UserName == username, cancellationToken);
     }
     
-    public ValueTask<User?> GetUserByIdAsync(Guid id, CancellationToken cancellationToken)
+    public Task<User?> GetUserByIdAsync(Guid id, CancellationToken cancellationToken)
     {
-        return _context.Users.FindAsync(id, cancellationToken);
+        return _context.Users.Include(x=> x.Tickets).Include(x=>x.Favorites).Include(x=>x.Posts).FirstOrDefaultAsync(x=>x.Id == id, cancellationToken);
     }
 
     public async Task CreateUserAsync(User user, CancellationToken cancellationToken)

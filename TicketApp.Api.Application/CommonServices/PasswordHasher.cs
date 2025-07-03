@@ -1,4 +1,4 @@
-﻿namespace TicketApp.Api.Appication.CommonServices;
+﻿namespace TicketApp.Api.Application.CommonServices;
 
 public static class PasswordHasher
 {
